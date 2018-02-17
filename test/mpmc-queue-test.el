@@ -92,6 +92,25 @@
     )
   )
 
+
+(ert-deftest get-empty-queue-non-blocking ()
+  "> calling `mpmc-queue-get' with non-nil `non-blocking' does not block"
+  (let* (
+        (q (mpmc-queue--create))
+        )
+    (should (null (mpmc-queue-get q t)))
+    )
+  )
+
+(ert-deftest peek-empty-queue-non-blocking ()
+  "> calling `mpmc-queue-peek' with non-nil `non-blocking' does not block"
+  (let* (
+        (q (mpmc-queue--create))
+        )
+    (should (null (mpmc-queue-peek q t)))
+    )
+  )
+
 (ert-deftest check-empty-queue-p ()
   "> calling `mpmc-queue-empty-p' checks the emptiness correctly."
   (let ((q (mpmc-queue--create)))
