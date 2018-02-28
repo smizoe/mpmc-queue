@@ -45,11 +45,11 @@ This queue has 3 fields:
 - `mutex`: the mutex associated with this queue.
 - `non-empty-condition`: the condition variable used to notify changes from the empty state to a non-empty state.
 
-There is macro `with-mpmc-queue-mutex` which runs the given body while holding the mutex of a mpmc queue:
+There is macro `mpmc-queue--with-mutex` which runs the given body while holding the mutex of a mpmc queue:
 
 ``` emacs-lisp
 (setq-local q (mpmc-queue--create))
-(with-mpmc-queue-mutex q
+(mpmc-queue--with-mutex q
     ;; do whatever you want with the queue
     (...)
     )

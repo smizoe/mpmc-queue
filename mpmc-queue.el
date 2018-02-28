@@ -45,7 +45,7 @@
   non-empty-condition
   )
 
-(defmacro with-mpmc-queue-mutex (mpmcq &rest body)
+(defmacro mpmc-queue--with-mutex (mpmcq &rest body)
   "While taking the mutex of mpmc-queue MPMCQ, evaluate BODY."
   `(with-mutex (mpmc-queue-mutex ,mpmcq) ,@body)
   )
@@ -55,7 +55,7 @@
   "Get the first element from mpmc-queue MPMCQ.
 If NON-BLOCKING is t, return nil immediately if the queue is empty.
 Otherwise block until an element is available."
-  (with-mpmc-queue-mutex mpmcq
+  (mpmc-queue--with-mutex mpmcq
                     (unless (and non-blocking (queue-empty (mpmc-queue-internal-queue mpmcq)))
                         (while (queue-empty (mpmc-queue-internal-queue mpmcq))
                           (condition-wait (mpmc-queue-non-empty-condition mpmcq))
@@ -73,7 +73,7 @@ Otherwise block until an element is available."
   "Return the value at the head of MPMCQ.
 If NON-BLOCKING is t and the queue is empty, return nil immediately.
 Otherwise block until an element is available."
-  (with-mpmc-queue-mutex mpmcq
+  (mpmc-queue--with-mutex mpmcq
                     (unless (and non-blocking (queue-empty (mpmc-queue-internal-queue mpmcq)))
                         (while (queue-empty (mpmc-queue-internal-queue mpmcq))
                           (condition-wait (mpmc-queue-non-empty-condition mpmcq))
@@ -88,7 +88,7 @@ Otherwise block until an element is available."
 
 (defun mpmc-queue-put (mpmcq elem)
   "Given MPMCQ, append ELEM to it."
-  (with-mpmc-queue-mutex mpmcq
+  (mpmc-queue--with-mutex mpmcq
                     (queue-enqueue
                       (mpmc-queue-internal-queue mpmcq)
                       elem
@@ -99,7 +99,7 @@ Otherwise block until an element is available."
 
 (defun mpmc-queue-empty-p (mpmcq)
   "Check if MPMCQ is empty and return t if it's empty."
-  (with-mpmc-queue-mutex mpmcq
+  (mpmc-queue--with-mutex mpmcq
               (let ((internal-queue (mpmc-queue-internal-queue mpmcq)))
                 (queue-empty internal-queue)
                 )
