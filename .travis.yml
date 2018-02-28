@@ -38,3 +38,4 @@ install:
 script:
   # Run your tests
   - cask exec ert-runner
+  - cask emacs -Q -batch -l package-lint.el -f package-lint-batch-and-exit mpmc-queue.el

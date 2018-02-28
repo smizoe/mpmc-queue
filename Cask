@@ -6,7 +6,9 @@
 
 (depends-on "queue" "0.2")
 (development
+ (depends-on "package-lint")
  (depends-on "f")
  (depends-on "ecukes")
  (depends-on "ert-runner")
- (depends-on "el-mock"))
+ (depends-on "el-mock")
+ )
