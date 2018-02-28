@@ -43,3 +43,4 @@ script:
   # Run your tests
   - cask exec ert-runner
   - cask emacs -Q -batch --eval "${INIT_PACKAGE_EL}" -l package-lint.el -f package-lint-batch-and-exit mpmc-queue.el
+  - cask emacs -Q -batch -l mpmc-queue.el --eval "(progn (byte-compile-file \"mpmc-queue.el\") (require 'mpmc-queue) (require 'checkdoc) (with-current-buffer (find-file \"mpmc-queue.el\") (checkdoc-current-buffer t)))"
