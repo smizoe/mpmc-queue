@@ -15,11 +15,7 @@ matrix:
 env:
   global:
     - >-
-      INIT_PACKAGE_EL="(progn
-        (require 'package)
-        (push '(\"melpa\" . \"http://melpa.org/packages/\") package-archives)
-        (push '(\"elpa\" . \"http://elpa.gun.org/packages/\") package-archives)
-        (package-initialize))"
+      INIT_PACKAGE_EL="(progn (require 'package) (push '(\"melpa\" . \"https://melpa.org/packages/\") package-archives) (push '(\"gnu\" . \"https://elpa.gnu.org/packages/\") package-archives) (package-initialize) (package-refresh-contents))"
   matrix:
     - EMACS_VERSION=26.0.91 PRETEST=yes EMACSCONFFLAGS="--with-x-toolkit=no --without-x --without-all --with-xml2 --with-threads CFLAGS='-O2 -march=native' CXXFLAGS='-O2 -march=native'"
     - EMACS_VERSION=snapshot EMACSCONFFLAGS="--with-x-toolkit=no --without-x --without-all --with-xml2 --with-threads CFLAGS='-O2 -march=native' CXXFLAGS='-O2 -march=native'"
@@ -46,4 +42,4 @@ install:
 script:
   # Run your tests
   - cask exec ert-runner
-  - cask emacs -Q -batch -l package-lint.el -f package-lint-batch-and-exit mpmc-queue.el
+  - cask emacs -Q -batch --eval "${INIT_PACKAGE_EL}" -l package-lint.el -f package-lint-batch-and-exit mpmc-queue.el
