@@ -14,11 +14,11 @@ matrix:
     - env: EMACS_VERSION=snapshot
 env:
   global:
-    - >-
-      INIT_PACKAGE_EL="(progn (require 'package) (push '(\"melpa\" . \"https://melpa.org/packages/\") package-archives) (push '(\"gnu\" . \"https://elpa.gnu.org/packages/\") package-archives) (package-initialize) (package-refresh-contents))"
+    - INIT_PACKAGE_EL="(progn (require 'package) (push '(\"melpa\" . \"https://melpa.org/packages/\") package-archives) (push '(\"gnu\" . \"https://elpa.gnu.org/packages/\") package-archives) (package-initialize) (package-refresh-contents))"
+    - EMACSCONFFLAGS="--with-x-toolkit=no --without-x --without-all --with-xml2 --with-threads CFLAGS='-O2 -march=native' CXXFLAGS='-O2 -march=native'"
   matrix:
-    - EMACS_VERSION=26.0.91 PRETEST=yes EMACSCONFFLAGS="--with-x-toolkit=no --without-x --without-all --with-xml2 --with-threads CFLAGS='-O2 -march=native' CXXFLAGS='-O2 -march=native'"
-    - EMACS_VERSION=snapshot EMACSCONFFLAGS="--with-x-toolkit=no --without-x --without-all --with-xml2 --with-threads CFLAGS='-O2 -march=native' CXXFLAGS='-O2 -march=native'"
+    - EMACS_VERSION=26.0.91 PRETEST=yes
+    - EMACS_VERSION=snapshot
 before_install:
   - sudo apt-get update
   - sudo apt-get remove gnutls-bin
