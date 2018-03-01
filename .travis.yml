@@ -20,15 +20,6 @@ env:
     - EMACS_VERSION=26.0.91 PRETEST=yes
     - EMACS_VERSION=snapshot
 before_install:
-  - sudo apt-get update
-  - sudo apt-get remove gnutls-bin
-  - sudo apt-get install ca-certificates build-essential nettle-dev libgmp-dev
-  - wget 'https://www.gnupg.org/ftp/gcrypt/gnutls/v3.1/gnutls-3.1.23.tar.xz'
-  - unxz gnutls-3.1.23.tar.xz && tar xf gnutls-3.1.23.tar
-  - pushd gnutls-3.1.23
-  - sudo ./configure && sudo make && sudo make install
-  - sudo ln -s /usr/local/lib/libgnutls.so.28 /usr/lib/libgnutls.so.28
-  - popd
   # Configure $PATH: Executables are installed to $HOME/bin
   - export PATH="$HOME/bin:$PATH"
   # Download the makefile to emacs-travis.mk
