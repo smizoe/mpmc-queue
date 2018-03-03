@@ -1,7 +1,7 @@
 (source gnu)
 (source melpa)
 
-(package "mpmc-queue" "0.1.0" "a multiple-producer-multiple-consumer queue for Emacs")
+(package "mpmc-queue" "0.1.1" "a multiple-producer-multiple-consumer queue for Emacs")
 (package-file "mpmc-queue.el")
 
 (depends-on "queue" "0.2")
