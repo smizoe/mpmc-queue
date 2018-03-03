@@ -4,7 +4,7 @@
 
 ;; Author:  Sho Mizoe <sho.mizoe@gmail.com>
 ;; URL: https://github.com/smizoe/mpmc-queue
-;; Version: 0.1.0
+;; Version: 0.1.1
 ;; Keywords: lisp, async
 ;; Package-Requires: ((emacs "26.0") (queue "0.2.0"))
 
