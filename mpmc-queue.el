@@ -1,6 +1,6 @@
 ;;; mpmc-queue.el --- a multiple-producer-multiple-consumer queue -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2018
+;; Copyright (C) 2018 Sho Mizoe
 
 ;; Author:  Sho Mizoe <sho.mizoe@gmail.com>
 ;; URL: https://github.com/smizoe/mpmc-queue
