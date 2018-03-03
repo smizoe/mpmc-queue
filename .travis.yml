@@ -27,6 +27,7 @@ before_install:
   # Install Emacs (according to $EMACS_VERSION) and Cask
   - make -f emacs-travis.mk install_emacs
   - make -f emacs-travis.mk install_cask
+  - emacs -Q -batch --eval "(message \"%s\" dynamic-library-alist)"
 install:
   # Install your dependencies
   - cask install
